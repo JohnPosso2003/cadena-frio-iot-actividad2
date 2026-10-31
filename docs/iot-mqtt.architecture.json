@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Cadena de frio IoT con MQTT en AWS",
+    "output": "iot-mqtt.html",
+    "quality_profile": "showcase"
+  },
+  "components": [
+    { "id": "esp32", "type": "external", "label": "ESP32 + DHT22", "sublabel": "Sensor fisico", "pos": [20, 160], "size": [140, 54] },
+    { "id": "explorer", "type": "external", "label": "MQTT Explorer", "sublabel": "Prueba del broker", "pos": [20, 290], "size": [140, 54] },
+    { "id": "mosquitto", "type": "backend", "label": "Mosquitto", "sublabel": "MQTT :1883 con usuario", "pos": [260, 220], "size": [160, 54] },
+    { "id": "simulador", "type": "backend", "label": "Simulador", "sublabel": "Python (pruebas)", "pos": [260, 360], "size": [160, 54] },
+    { "id": "suscriptor", "type": "backend", "label": "Suscriptor Python", "sublabel": "MQTT a CSV e InfluxDB", "pos": [500, 220], "size": [170, 54] },
+    { "id": "csv", "type": "database", "label": "lecturas.csv", "sublabel": "Archivo en el servidor", "pos": [500, 100], "size": [170, 50] },
+    { "id": "grafana", "type": "backend", "label": "Grafana", "sublabel": "Paneles y alertas :3000", "pos": [500, 360], "size": [170, 54] },
+    { "id": "influx", "type": "database", "label": "InfluxDB 2.9.1", "sublabel": "Bucket lecturas_iot :8086", "pos": [800, 220], "size": [180, 54] },
+    { "id": "gmail", "type": "external", "label": "Correo (Gmail)", "sublabel": "Aviso automatico", "pos": [760, 490], "size": [160, 54] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "VPC cadena-frio-mqtt-vpc (10.0.0.0/16)", "wraps": ["mosquitto", "simulador", "suscriptor", "csv", "grafana", "influx"] },
+    { "kind": "region", "label": "Subred publica | EC2 Ubuntu", "wraps": ["mosquitto", "simulador", "suscriptor", "csv", "grafana"] },
+    { "kind": "security-group", "label": "Subred privada | EC2 Ubuntu | solo desde la publica", "wraps": ["influx"] }
+  ],
+  "connections": [
+    { "id": "esp32-to-mosquitto", "from": "esp32", "to": "mosquitto", "label": "MQTT 1883", "variant": "emphasis", "labelDy": -21 },
+    { "id": "explorer-to-mosquitto", "from": "explorer", "to": "mosquitto", "label": "pruebas", "variant": "dashed", "labelDy": 21 },
+    { "id": "simulador-to-mosquitto", "from": "simulador", "to": "mosquitto", "label": "lecturas simuladas", "variant": "dashed", "fromSide": "top", "toSide": "bottom", "labelAt": [350, 317] },
+    { "id": "mosquitto-to-suscriptor", "from": "mosquitto", "to": "suscriptor", "label": "topics", "labelDy": -21 },
+    { "id": "suscriptor-to-csv", "from": "suscriptor", "to": "csv", "label": "escritura local", "fromSide": "top", "toSide": "bottom", "labelAt": [590, 185] },
+    { "id": "suscriptor-to-influx", "from": "suscriptor", "to": "influx", "label": "HTTP API 8086", "variant": "security", "labelDy": 21 },
+    { "id": "grafana-to-influx", "from": "grafana", "to": "influx", "label": "consulta Flux 8086", "variant": "security", "fromSide": "right", "toSide": "bottom", "via": [[890, 387]], "labelAt": [780, 407] },
+    { "id": "grafana-to-gmail", "from": "grafana", "to": "gmail", "label": "SMTP 587", "variant": "dashed", "fromSide": "bottom", "toSide": "left", "via": [[585, 517]], "labelAt": [660, 535] }
+  ],
+  "cards": [
+    { "dot": "emerald", "title": "Medicion", "items": ["DHT22 mide temperatura y humedad", "La ESP32 publica cada 5 segundos por MQTT", "Topics invernadero1/temperatura, humedad y alerta"] },
+    { "dot": "cyan", "title": "Nube (AWS)", "items": ["Mosquitto recibe con usuario y contrasena", "El suscriptor guarda en CSV e InfluxDB", "InfluxDB esta en la subred privada, sin IP publica"] },
+    { "dot": "rose", "title": "Alerta", "items": ["Rango seguro de 2 a 8 grados C", "Grafana revisa cada minuto el campo alerta", "Si hay alerta, envia un correo por SMTP"] }
+  ]
+}
