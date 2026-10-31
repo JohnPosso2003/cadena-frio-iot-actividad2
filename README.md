@@ -10,7 +10,7 @@ La práctica extiende la **Actividad 1**, que utilizaba HTTP/Flask y MySQL, a un
 
 ## Arquitectura en AWS
 
-![Arquitectura de la Actividad 2](docs/arquitectura.png)
+![Arquitectura de la Actividad 2](docs/arquitectura-archify.png)
 
 Ver también [diagrama editable en Mermaid](docs/arquitectura.mmd).
 
