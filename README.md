@@ -27,9 +27,9 @@ La IP pública asignada a la EC2 puede cambiar al reiniciar el laboratorio AWS A
 
 | Topic MQTT | Dato | Ejemplo |
 | --- | --- | --- |
-| `invernadero1/temperatura` | Temperatura, °C | `9.5` |
-| `invernadero1/humedad` | Humedad, % | `65.0` |
-| `invernadero1/alerta` | Estado | `NORMAL` o `ALERTA` |
+| `cadena_frio1/temperatura` | Temperatura, °C | `9.5` |
+| `cadena_frio1/humedad` | Humedad, % | `65.0` |
+| `cadena_frio1/alerta` | Estado | `NORMAL` o `ALERTA` |
 
 El programa `aws/registro_mqtt_influx.py` registra lecturas en un archivo CSV y en el bucket `lecturas_iot` de la organización `cadena_frio`. La medición de InfluxDB se denomina `cadena_frio`, con campos `temperatura`, `humedad`, `alerta` (binario) y `estado`, y la etiqueta `origen`.
 

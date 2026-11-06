@@ -6,9 +6,9 @@ Dependencias en Arduino IDE: placa *ESP32 by Espressif Systems*, bibliotecas *Pu
 
 Tópicos empleados:
 
-- `invernadero1/temperatura`
-- `invernadero1/humedad`
-- `invernadero1/alerta`
+- `cadena_frio1/temperatura`
+- `cadena_frio1/humedad`
+- `cadena_frio1/alerta`
 
 La autenticación MQTT está habilitada. Las mediciones se publican aproximadamente cada cinco segundos.
 

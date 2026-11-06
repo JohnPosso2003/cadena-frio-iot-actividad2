@@ -58,7 +58,7 @@ try:
 
             for nombre, valor in datos.items():
                 mensaje = client.publish(
-                    f"invernadero1/{nombre}",
+                    f"cadena_frio1/{nombre}",
                     str(valor),
                     qos=1,
                     retain=True
@@ -138,7 +138,7 @@ try:
 
             for nombre, valor in datos.items():
                 mensaje = client.publish(
-                    f"invernadero1/{nombre}",
+                    f"cadena_frio1/{nombre}",
                     str(valor),
                     qos=1,
                     retain=True

@@ -17,9 +17,9 @@ const bool USAR_SENSOR = true;
 WiFiClient wifiClient;
 PubSubClient mqtt(wifiClient);
 
-const char* TOPIC_TEMP = "invernadero1/temperatura";
-const char* TOPIC_HUM = "invernadero1/humedad";
-const char* TOPIC_ALERTA = "invernadero1/alerta";
+const char* TOPIC_TEMP = "cadena_frio1/temperatura";
+const char* TOPIC_HUM = "cadena_frio1/humedad";
+const char* TOPIC_ALERTA = "cadena_frio1/alerta";
 
 // ===== TIEMPOS =====
 const unsigned long INTERVALO = 5000;

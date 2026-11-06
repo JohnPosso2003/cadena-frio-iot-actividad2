@@ -33,7 +33,7 @@
     { "id": "grafana-to-gmail", "from": "grafana", "to": "gmail", "label": "SMTP 587", "variant": "dashed", "fromSide": "bottom", "toSide": "left", "via": [[585, 517]], "labelAt": [660, 535] }
   ],
   "cards": [
-    { "dot": "emerald", "title": "Medicion", "items": ["DHT22 mide temperatura y humedad", "La ESP32 publica cada 5 segundos por MQTT", "Topics invernadero1/temperatura, humedad y alerta"] },
+    { "dot": "emerald", "title": "Medicion", "items": ["DHT22 mide temperatura y humedad", "La ESP32 publica cada 5 segundos por MQTT", "Topics cadena_frio1/temperatura, humedad y alerta"] },
     { "dot": "cyan", "title": "Nube (AWS)", "items": ["Mosquitto recibe con usuario y contrasena", "El suscriptor guarda en CSV e InfluxDB", "InfluxDB esta en la subred privada, sin IP publica"] },
     { "dot": "rose", "title": "Alerta", "items": ["Rango seguro de 2 a 8 grados C", "Grafana revisa cada minuto el campo alerta", "Si hay alerta, envia un correo por SMTP"] }
   ]

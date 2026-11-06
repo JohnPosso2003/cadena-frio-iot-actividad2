@@ -50,7 +50,7 @@ lectura = {}
 def on_connect(client, userdata, flags, reason_code, properties):
     if reason_code == 0:
         print("MQTT conectado")
-        client.subscribe("invernadero1/+")
+        client.subscribe("cadena_frio1/+")
     else:
         print("Error MQTT:", reason_code)
 
@@ -193,7 +193,7 @@ lectura = {}
 def on_connect(client, userdata, flags, reason_code, properties):
     if reason_code == 0:
         print("MQTT conectado")
-        client.subscribe("invernadero1/+")
+        client.subscribe("cadena_frio1/+")
     else:
         print("Error MQTT:", reason_code)
 

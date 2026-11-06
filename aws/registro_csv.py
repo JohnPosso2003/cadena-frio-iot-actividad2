@@ -30,7 +30,7 @@ lectura = {}
 def al_conectar(client, userdata, flags, reason_code, properties):
     if reason_code == 0:
         print("Conectado a Mosquitto")
-        client.subscribe("invernadero1/+")
+        client.subscribe("cadena_frio1/+")
     else:
         print("Error de conexion:", reason_code)
 
@@ -124,7 +124,7 @@ lectura = {}
 def al_conectar(client, userdata, flags, reason_code, properties):
     if reason_code == 0:
         print("Conectado a Mosquitto")
-        client.subscribe("invernadero1/+")
+        client.subscribe("cadena_frio1/+")
     else:
         print("Error de conexion:", reason_code)
 
